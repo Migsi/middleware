@@ -88,6 +88,15 @@ class ISCSIPortalService(CRUDService):
                     choices[alias['address']] = alias['address']
                 for alias in i['aliases']:
                     choices[alias['address']] = alias['address']
+                # Attempt to add IPv6 addresses
+                try:
+                    if i['type'] == 'PHYSICAL':
+                        for alias in i['state']['aliases']:
+                            if alias['type'] == 'INET6':
+                                choices[alias['address']] = alias['address']
+                except KeyError:
+                    pass
+
         return choices
 
     async def __validate(self, verrors, data, schema, old=None):
