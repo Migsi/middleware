@@ -203,6 +203,8 @@ pytest_command = [
 if testexpr:
     pytest_command.extend(['-k', testexpr])
 
+tests = ['api2/test_001_ssh.py', 'api2/test_003_network_global.py', 'api2/test_005_interface.py', 'api2/test_006_pool_and_sysds.py', 'api2/test_007_early_settings.py']
+tests += ['api2/test_300_nfs.py']
 if tests:
     pytest_command.extend(tests)
 else:
